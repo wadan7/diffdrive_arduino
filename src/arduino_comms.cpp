@@ -39,6 +39,7 @@ void ArduinoComms::setMotorValues(int val_1, int val_2)
 {
     std::stringstream ss;
     ss << "m " << val_1 << " " << val_2 << "\r";
+    RCLCPP_INFO(m_Logger, ss.str());
     sendMsg(ss.str(), false);
 }
 
