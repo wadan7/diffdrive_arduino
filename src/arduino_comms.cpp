@@ -37,10 +37,17 @@ void ArduinoComms::readEncoderValues(int &val_1, int &val_2)
 
 void ArduinoComms::setMotorValues(int val_1, int val_2)
 {
+    static bool flag = true;
+
+    if ( !flag )
+    {
+        flag = !flag;
+        return;
+    }
     std::stringstream ss;
     ss << "m " << val_1 << " " << val_2 << "\r";
-    RCLCPP_INFO(m_Logger, ss.str());
     sendMsg(ss.str(), false);
+    flag = !flag;
 }
 
 void ArduinoComms::setPidValues(float k_p, float k_d, float k_i, float k_o)
